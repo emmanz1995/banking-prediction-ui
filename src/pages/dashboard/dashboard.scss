@@ -1,0 +1,28 @@
+.main {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  &__menu {
+    width: 25%;
+  }
+  &__hub {
+    //width: 85%;
+    //max-width: 800px;
+    //margin: 0 auto;
+    color: #F4F7FE;
+  }
+  &__journalSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    .main__journal {
+      padding: 10px 0;
+    }
+  }
+}

@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test should render component 1`] = `
+<div>
+  <main
+    class="sc-aXZVg ljoJvr"
+  >
+    <div>
+      <div
+        class="navbar"
+      >
+        <div
+          class="title"
+        >
+          <h3>
+            Hello World!
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      class="layout-header"
+    >
+      <div
+        class="sidebar-left"
+      >
+        <div
+          class="sidebar"
+        >
+          <div
+            class="title"
+          />
+          <ul
+            class="list"
+          >
+            <li>
+              <a
+                href="/dashboard"
+              >
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                href="/users"
+              >
+                Users
+              </a>
+            </li>
+            <li>
+              <a
+                href="/profile"
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="/announcements"
+              >
+                Announcements
+              </a>
+            </li>
+            <li>
+              <a
+                href="/about"
+              >
+                About
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="sc-dAlyuH glGfOt"
+        >
+          <div
+            class="sc-cwHptR bdpYHD"
+          >
+            <div
+              class="sc-jlZhew bObgCL"
+            >
+              <h3>
+                Access Your Account
+              </h3>
+              emmanz95
+            </div>
+             
+            <div>
+              <button
+                class="sc-gEvEer fEedjk"
+              >
+                Institutions
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+`;

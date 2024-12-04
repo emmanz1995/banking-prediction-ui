@@ -1,0 +1,25 @@
+.sidebar {
+  padding: 10px;
+  background-color: #0B0F1F;
+  //position: absolute;
+  width: 150px;
+  height: 100vh;
+
+  .title {
+    margin: 0;
+    text-align: center;
+  }
+  .list {
+    text-align: justify;
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+    li {
+      padding: 10px;
+    }
+    a {
+      color: #dddddd;
+      text-decoration: none;
+    }
+  }
+}
