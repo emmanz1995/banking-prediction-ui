@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {FaUser, FaMoneyBill, FaBalanceScale} from 'react-icons/fa';
+import { FaUser, FaMoneyBill, FaBalanceScale } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './dashboard.scss';
 import Layout from '../../components/template/Layout/Layout';
@@ -14,7 +14,7 @@ function Dashboard() {
 
   const handleSetInstitutionsId = (id: string) => setInstutionsId(id);
 
-  const onClickLink = (link: string) => navigate(link)
+  const onClickLink = (link: string) => navigate(link);
 
   return (
     <Layout>
@@ -25,9 +25,24 @@ function Dashboard() {
         </div>
         <p>{instutionsId}</p>
         <div className="main__journalSection">
-          <AccessCard title="Register your Account" icon={<FaUser />} clickLink={onClickLink} link='/accessAccountsWizard' />
-          <AccessCard title="See your Account Transactions" icon={<FaMoneyBill />} clickLink={onClickLink} link='/' />
-          <AccessCard title="Summarise Balance" icon={<FaBalanceScale />} clickLink={onClickLink} link='/' />
+          <AccessCard
+            title="Register your Account"
+            icon={<FaUser />}
+            clickLink={onClickLink}
+            link="/accessAccountsWizard"
+          />
+          <AccessCard
+            title="See your Account Transactions"
+            icon={<FaMoneyBill />}
+            clickLink={onClickLink}
+            link="/accounts"
+          />
+          <AccessCard
+            title="Summarise Balance"
+            icon={<FaBalanceScale />}
+            clickLink={onClickLink}
+            link="/"
+          />
         </div>
       </div>
     </Layout>

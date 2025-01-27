@@ -1,4 +1,4 @@
-import {render, fireEvent, waitFor} from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AccessAccountsWizard from './index';
 import { onSearchInstitutions } from '../../connector/user/institutions';
@@ -22,9 +22,9 @@ describe('test', () => {
     },
   ];
   it('should render component', async () => {
-    const { container } = render(<AccessAccountsWizard />)
+    const { container } = render(<AccessAccountsWizard />);
 
-    expect(container).toMatchSnapshot()
+    expect(container).toMatchSnapshot();
   });
 
   it('should render initial layout and button', () => {
@@ -36,33 +36,43 @@ describe('test', () => {
   });
 
   it('should show modal after clicking the institutes button', async () => {
-   // mocks the institutions
-   (onSearchInstitutions as jest.MockedFunction<typeof onSearchInstitutions>).mockResolvedValue(mockInstitutions)
-    const { getByRole, getByTestId, getByPlaceholderText, getByText, queryByText } = render(<AccessAccountsWizard />);
+    // mocks the institutions
+    (
+      onSearchInstitutions as jest.MockedFunction<typeof onSearchInstitutions>
+    ).mockResolvedValue(mockInstitutions);
+    const {
+      getByRole,
+      getByTestId,
+      getByPlaceholderText,
+      getByText,
+      queryByText,
+    } = render(<AccessAccountsWizard />);
 
     // gets the button institution button
     const btn = getByRole('button');
-    fireEvent.click(btn)
+    fireEvent.click(btn);
 
-    const form = getByTestId('institution-search')
-    const input = getByPlaceholderText('Search an institution')
+    const form = getByTestId('institution-search');
+    const input = getByPlaceholderText('Search an institution');
 
     // fires on change event
-    fireEvent.change(input, { target: { value: 'Revolut' } })
+    fireEvent.change(input, { target: { value: 'Revolut' } });
 
-    await waitFor(() => expect(getByText('Loading...')).toBeInTheDocument())
-    await waitFor(() => expect(queryByText('Loading...')).not.toBeInTheDocument())
+    await waitFor(() => expect(getByText('Loading...')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(queryByText('Loading...')).not.toBeInTheDocument()
+    );
 
     // asserting that these values exists in the documents
-    expect(btn).toBeInTheDocument()
-    expect(form).toBeInTheDocument()
-    expect(input).toBeInTheDocument()
-    expect(input).toHaveValue('Revolut')
+    expect(btn).toBeInTheDocument();
+    expect(form).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveValue('Revolut');
 
-    const closeBtn = getByRole('button', { name: /Close/i })
+    const closeBtn = getByRole('button', { name: /Close/i });
     fireEvent.click(closeBtn);
 
     expect(form).not.toBeInTheDocument();
     expect(input).not.toBeInTheDocument();
-  })
+  });
 });

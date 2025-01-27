@@ -101,7 +101,7 @@ const StyledCardSearchView = styled.div`
   gap: 20px;
   h3 {
     color: ${props => props.theme.background};
-  };
+  }
   overflow-y: auto;
   height: 365px;
   scrollbar-width: thin; /* For modern browsers */

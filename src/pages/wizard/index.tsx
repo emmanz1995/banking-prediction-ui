@@ -50,9 +50,9 @@ const MainWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  width: 100%;;
+  width: 100%;
   color: ${props => props.theme.text};
-`
+`;
 
 const TitleSection = styled.div`
   padding: 30px;
@@ -61,4 +61,4 @@ const TitleSection = styled.div`
   justify-content: space-between;
   width: 100%;
   color: ${props => props.theme.text};
-`
+`;

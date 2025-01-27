@@ -3,7 +3,7 @@ import { map } from 'lodash';
 
 const links: { title: string; link: string }[] = [
   {
-    link: '/dashboard',
+    link: '/',
     title: 'Dashboard',
   },
   {
@@ -13,10 +13,6 @@ const links: { title: string; link: string }[] = [
   {
     link: '/profile',
     title: 'Profile',
-  },
-  {
-    link: '/announcements',
-    title: 'Announcements',
   },
   {
     link: '/about',

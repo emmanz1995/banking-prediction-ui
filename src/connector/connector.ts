@@ -3,12 +3,12 @@ import { get, merge } from 'lodash';
 // import authHeader from '../utils/authHeaderUtil';
 
 interface Options {
-  method: string;
+  method?: string;
   authHeader?: any;
   data?: object;
 }
 
-const request = async (url: string, options: Options) => {
+const request = async (url: string, options?: Options) => {
   const defaults = {
     method: 'GET',
     headers: {
