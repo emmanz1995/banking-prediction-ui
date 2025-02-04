@@ -12,6 +12,7 @@ const dark: {
   buttonBackground: string;
   buttonText: string;
   cardBackground: string;
+  spacing: any;
 } = {
   purpleTheme: 'rgb(106 85 250 / 1)',
   background: 'rgb(31 41 55 / 1)',
@@ -19,6 +20,12 @@ const dark: {
   buttonBackground: '',
   buttonText: '',
   cardBackground: '#F4F7FE',
+  spacing: {
+    2: '0.5rem',
+    3: '0.75rem',
+    4: '1rem',
+    8: '2rem'
+  }
 };
 const light: {
   purpleTheme: string;
@@ -27,6 +34,7 @@ const light: {
   buttonBackground: string;
   buttonText: string;
   cardBackground: string;
+  spacing: any;
 } = {
   purpleTheme: 'rgb(106 85 250 / 1)',
   background: '#F4F7FE',
@@ -34,6 +42,12 @@ const light: {
   buttonBackground: '',
   buttonText: '',
   cardBackground: 'rgb(31 41 55 / 1)',
+  spacing: {
+    2: '0.5rem',
+    3: '0.75rem',
+    4: '1rem',
+    8: '2rem'
+  }
 };
 
 const theme = {
