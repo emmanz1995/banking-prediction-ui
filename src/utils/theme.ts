@@ -24,8 +24,8 @@ const dark: {
     2: '0.5rem',
     3: '0.75rem',
     4: '1rem',
-    8: '2rem'
-  }
+    8: '2rem',
+  },
 };
 const light: {
   purpleTheme: string;
@@ -46,8 +46,8 @@ const light: {
     2: '0.5rem',
     3: '0.75rem',
     4: '1rem',
-    8: '2rem'
-  }
+    8: '2rem',
+  },
 };
 
 const theme = {

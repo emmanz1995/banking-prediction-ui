@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     margin: 0;
     background-color: ${props => props.theme.background};
+    font-family: "Josefin Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
   }
   h1,
   h2,

@@ -1,4 +1,4 @@
-import {Main, StyledLayout} from './styles';
+import { Main, StyledLayout } from './styles';
 import Sidebar from '../../organisms/sidebar';
 
 function Layout({ children }) {
