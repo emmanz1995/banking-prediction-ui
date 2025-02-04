@@ -4,7 +4,7 @@ import { Wallet } from 'lucide-react';
 import _ from 'lodash';
 import { request } from '../../connector';
 import Layout from '../../components/template/Layout/Layout';
-import {TransactionCard} from '../../components/molecules/transactionCard';
+import { TransactionCard } from '../../components/molecules/transactionCard';
 
 const TransactionsDashboard = () => {
   const [accounts, setAccounts]: any[] = useState([]);

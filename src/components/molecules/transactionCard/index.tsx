@@ -78,7 +78,7 @@ export const TransactionCard: FC<TransactionProps> = ({
   transactionAmount,
   valueDate,
   receiver,
-  testId
+  testId,
 }) => {
   const { amount } = transactionAmount;
 
