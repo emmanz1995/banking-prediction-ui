@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.input`
-  width: 300px;
-  border: 2px solid ${props => props.theme.hover_purple};
+  width: 100%;
+  border: 1px solid ${props => props.theme.gray?.[400]};
   padding: 8px;
   border-radius: 4px;
   margin: 10px 0;

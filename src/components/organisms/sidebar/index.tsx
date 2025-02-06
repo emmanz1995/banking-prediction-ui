@@ -43,6 +43,10 @@ const NavItemContainer = styled.div<{
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 `;
 const LogoutButton = styled.button`
   display: flex;
@@ -66,10 +70,10 @@ const Sidebar = () => {
         <LogoText>Transaction Predication</LogoText>
       </Logo>
       <Nav>
-        <NavItem icon={<Home size={20} />} text="Dashboard" active />
-        <NavItem icon={<CreditCard size={20} />} text="Transactions" />
-        <NavItem icon={<PieChart size={20} />} text="Analytics" />
-        <NavItem icon={<Settings size={20} />} text="Settings" />
+        <NavItem icon={<Home size={20} />} text="Dashboard" active link="/" />
+        <NavItem icon={<CreditCard size={20} />} text="Transactions" link="/" />
+        <NavItem icon={<PieChart size={20} />} text="Analytics" link="/" />
+        <NavItem icon={<Settings size={20} />} text="Settings" link="/" />
       </Nav>
       <LogoutButton>
         <LogOut size={20} />
@@ -82,15 +86,17 @@ const NavItem = ({
   icon,
   text,
   active = false,
+  link,
 }: {
   icon: React.ReactNode;
   text: string;
   active?: boolean;
+  link: string;
 }) => {
   return (
     <NavItemContainer active={active}>
       {icon}
-      <span>{text}</span>
+      <a href={link}>{text}</a>
     </NavItemContainer>
   );
 };

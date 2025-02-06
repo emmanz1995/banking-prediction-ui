@@ -29,11 +29,6 @@ const StyledTransactionCard = styled.div`
   }
   margin: 10px 0;
 `;
-// const TransactionGrid = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   gap: ${props => props.theme.spacing[3]};
-// `;
 
 const TransactionContent = styled.div`
   display: flex;

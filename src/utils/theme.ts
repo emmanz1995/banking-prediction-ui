@@ -35,6 +35,10 @@ const light: {
   buttonText: string;
   cardBackground: string;
   spacing: any;
+  white: {};
+  gray: {};
+  green: {};
+  red: {};
 } = {
   purpleTheme: 'rgb(106 85 250 / 1)',
   background: '#F4F7FE',
@@ -47,6 +51,22 @@ const light: {
     3: '0.75rem',
     4: '1rem',
     8: '2rem',
+  },
+  white: '#FFFFFF',
+  gray: {
+    50: '#F9FAFB',
+    100: '#F3F4F6',
+    400: '#9CA3AF',
+    500: '#6B7280',
+    800: '#1F2937',
+  },
+  green: {
+    100: '#DCFCE7',
+    600: '#16A34A',
+  },
+  red: {
+    100: '#FEE2E2',
+    600: '#DC2626',
   },
 };
 
