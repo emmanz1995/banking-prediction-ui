@@ -6,37 +6,42 @@ import AgreementForm from '../../components/organisms/agreementForm/index';
 import RequisitionForm from '../../components/organisms/requisitionsForm/index';
 import AccountAccessForm from '../../components/organisms/accountAccessForm/index';
 import SuccessForm from '../../components/organisms/successForm/index';
+import Button from '../../components/atom/button/index';
 
 function AccessAccountsWizard() {
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const steps = [
     {
+      formType: 'agreementForm',
       icon: <FiUser />,
       component: AgreementForm,
     },
     {
+      formType: 'requisitionForm',
       icon: <FiMail />,
       component: RequisitionForm,
     },
     {
+      formType: 'accountAccessForm',
       icon: <FiLock />,
       component: AccountAccessForm,
     },
     {
+      formType: 'successForm',
       icon: <FiCheck />,
       component: SuccessForm,
     },
   ];
 
   const nextPage = () => {
-    if(currentIndex < steps.length) setCurrentIndex(step => step + 1);
-  }
+    if (currentIndex < steps.length) setCurrentIndex(step => step + 1);
+  };
   const previousPage = () => {
-    if(currentIndex > 1) setCurrentIndex(step => step - 1);
-  }
+    if (currentIndex > 1) setCurrentIndex(step => step - 1);
+  };
 
-  const ComponentForms = steps[currentIndex - 1].component
+  const ComponentForms = steps[currentIndex - 1].component;
 
   return (
     <Layout>
@@ -55,8 +60,14 @@ function AccessAccountsWizard() {
           </StepContainer>
           <FormWrapper>
             <ComponentForms />
-            <button onClick={previousPage}>Back</button>
-            <button onClick={nextPage}>Next</button>
+            <ButtonWrapper>
+              <Button onClick={previousPage} size="medium">
+                Back
+              </Button>
+              <Button onClick={nextPage} size="medium">
+                Next
+              </Button>
+            </ButtonWrapper>
           </FormWrapper>
         </Card>
       </MainWrapper>
@@ -66,7 +77,13 @@ function AccessAccountsWizard() {
 
 export default AccessAccountsWizard;
 
-const StepWrapper = styled.div<{ active: boolean; completed: boolean; }>`
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StepWrapper = styled.div<{ active: boolean; completed: boolean }>`
   background: ${props =>
     props.completed
       ? props.theme.purpleTheme
@@ -111,19 +128,5 @@ const StepContainer = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  margin: 30px 0 0 0;
+  margin: 40px 0 0 0;
 `;
-
-// const TitleWrapper = styled.div`
-//   width: 100%;
-//   color: ${props => props.theme.text};
-// `;
-//
-// const TitleSection = styled.div`
-//   padding: 30px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   width: 100%;
-//   color: ${props => props.theme.text};
-// `;

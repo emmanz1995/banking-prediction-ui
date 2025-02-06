@@ -15,6 +15,6 @@ export const StyledButton = styled.button<{ size: ButtonProps['size'] }>`
   border-radius: 4px;
   // width: 100%;
   cursor: pointer;
-  color: ${props => props.theme.text};
+  color: ${props => props.theme.white};
   font-weight: bold;
 `;

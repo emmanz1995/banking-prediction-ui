@@ -1,5 +1,3 @@
-const SuccessForm = () => (
-  <div>Success Form</div>
-)
+const SuccessForm = () => <div>Success Form</div>;
 
 export default SuccessForm;

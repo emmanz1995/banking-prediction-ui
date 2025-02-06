@@ -16,7 +16,7 @@ const TransactionsDashboard = () => {
     retrieveAccounts();
   }, []);
   const retrieveAccounts = async () => {
-    const res = await request('http://localhost:8083/api/v1/details');
+    const res = await request(`${import.meta.env.VITE_API_URL}/api/v1/details`);
     setAccounts(res);
   };
 
