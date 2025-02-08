@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { EventHandler, FormEventHandler, useState } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMail, FiLock, FiCheck } from 'react-icons/fi';
 import Layout from '../../components/template/Layout/Layout';
@@ -7,35 +7,86 @@ import RequisitionForm from '../../components/organisms/requisitionsForm/index';
 import AccountAccessForm from '../../components/organisms/accountAccessForm/index';
 import SuccessForm from '../../components/organisms/successForm/index';
 import Button from '../../components/atom/button/index';
+import { request } from '../../connector/index';
 
 function AccessAccountsWizard() {
+  const formData = {
+    institutionId: '',
+    maxHistoricalDays: 0,
+    accessValidForDays: 0,
+  };
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [formValue, setFormValue] = useState(formData);
+  const accessScope = ['balances', 'details', 'transactions'];
+
+  const handleChange = (evt: any) => {
+    setFormValue(formValue => ({
+      ...formValue,
+      [evt.target.name]: evt.target.value,
+    }));
+  };
+
+  const data = {
+    ...formValue,
+    accessScope,
+  };
+
+  const handleCreateAnAgreement = async () => {
+    try {
+      const response = await request(
+        `${import.meta.env.VITE_API_URL}/api/v1/access/createUserAgreement`,
+        {
+          method: 'POST',
+          data,
+        }
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const steps = [
     {
       formType: 'agreementForm',
       icon: <FiUser />,
       component: AgreementForm,
+      props: { formValue, handleChange, accessScope },
     },
     {
       formType: 'requisitionForm',
       icon: <FiMail />,
       component: RequisitionForm,
+      props: {},
     },
     {
       formType: 'accountAccessForm',
       icon: <FiLock />,
       component: AccountAccessForm,
+      props: {},
     },
     {
       formType: 'successForm',
       icon: <FiCheck />,
       component: SuccessForm,
+      props: {},
     },
   ];
 
-  const nextPage = () => {
-    if (currentIndex < steps.length) setCurrentIndex(step => step + 1);
+  const nextPage = async evt => {
+    evt.preventDefault();
+    let isErrorPresented = false;
+
+    if (currentIndex < steps.length && !isErrorPresented) {
+      setCurrentIndex(step => step + 1);
+      if (currentIndex === 1) {
+        isErrorPresented;
+        await handleCreateAnAgreement();
+      } else {
+        isErrorPresented;
+        setCurrentIndex(1);
+      }
+    }
   };
   const previousPage = () => {
     if (currentIndex > 1) setCurrentIndex(step => step - 1);
@@ -59,7 +110,7 @@ function AccessAccountsWizard() {
             ))}
           </StepContainer>
           <FormWrapper>
-            <ComponentForms />
+            <ComponentForms {...steps[currentIndex - 1].props} />
             <ButtonWrapper>
               <Button onClick={previousPage} size="medium">
                 Back

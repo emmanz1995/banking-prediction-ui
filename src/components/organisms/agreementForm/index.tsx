@@ -1,8 +1,6 @@
-import { useState } from 'react';
+import { FC } from 'react';
 import InputField from '../../atom/input';
 import styled from 'styled-components';
-import { request } from '../../../connector/index';
-import Button from '../../atom/button/index';
 
 const Form = styled.form``;
 
@@ -20,100 +18,75 @@ const ParaWrapper = styled.span`
   border-radius: 5px;
 `;
 
-const AgreementForm = () => {
-  const formData = {
-    institutionId: '',
-    maxHistoricalDays: 0,
-    accessValidForDays: 0,
+interface AgreementFromTypes {
+  formValue: {
+    institutionId: string;
+    maxHistoricalDays: number;
+    accessValidForDays: number;
   };
-  const [formValue, setFormValue] = useState(formData);
-  const accessScope = ['balances', 'details', 'transactions'];
+  accessScope: Array<string>;
+  handleChange: any;
+}
 
-  const handleChange = (evt: any) => {
-    setFormValue(formValue => ({
-      ...formValue,
-      [evt.target.name]: evt.target.value,
-    }));
-  };
-
-  const data = {
-    ...formValue,
-    accessScope,
-  };
-
-  const handleCreateAnAgreement = async evt => {
-    evt.preventDefault();
-    try {
-      const response = await request(
-        `${import.meta.env.VITE_API_URL}/api/v1/access/createUserAgreement`,
-        {
-          method: 'POST',
-          data,
-        }
-      );
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  return (
-    <Form>
-      <h3>Agreement Form</h3>
-      <FormWrapper>
-        <InputGroup>
-          <label>Search Institutions</label>
-          <br />
-          <InputField
-            type="search"
-            name="institutionId"
-            placeholder="Find your institution"
-            onChange={handleChange}
-            value={formValue.institutionId}
-          />
-        </InputGroup>
+const AgreementForm: FC<AgreementFromTypes> = ({
+  institutionId,
+  maxHistoricalDays,
+  accessValidForDays,
+  accessScope,
+  handleChange,
+}) => (
+  <Form>
+    <h3>Agreement Form</h3>
+    <FormWrapper>
+      <InputGroup>
+        <label>Search Institutions</label>
+        <br />
+        <InputField
+          type="search"
+          name="institutionId"
+          placeholder="Find your institution"
+          onChange={handleChange}
+          value={institutionId}
+        />
+      </InputGroup>
+      <br />
+      <br />
+      <InputGroup>
+        <label>Historical Days</label>
+        <br />
+        <InputField
+          type="number"
+          name="maxHistoricalDays"
+          placeholder="Select a number of historical days"
+          onChange={handleChange}
+          value={maxHistoricalDays}
+        />
+      </InputGroup>
+      <br />
+      <br />
+      <InputGroup>
+        <label>Access Days</label>
+        <br />
+        <InputField
+          type="number"
+          name="accessValidForDays"
+          placeholder="Select a number of accessible days"
+          onChange={handleChange}
+          value={accessValidForDays}
+        />
+      </InputGroup>
+      <br />
+      <br />
+      <InputGroup>
+        <label>Select scope access</label>
         <br />
         <br />
-        <InputGroup>
-          <label>Historical Days</label>
-          <br />
-          <InputField
-            type="number"
-            name="maxHistoricalDays"
-            placeholder="Select a number of historical days"
-            onChange={handleChange}
-            value={formValue.maxHistoricalDays}
-          />
-        </InputGroup>
+        <ParaWrapper>{accessScope.join(', ')}</ParaWrapper>
         <br />
         <br />
-        <InputGroup>
-          <label>Access Days</label>
-          <br />
-          <InputField
-            type="number"
-            name="accessValidForDays"
-            placeholder="Select a number of accessible days"
-            onChange={handleChange}
-            value={formValue.accessValidForDays}
-          />
-        </InputGroup>
-        <br />
-        <br />
-        <InputGroup>
-          <label>Select scope access</label>
-          <br />
-          <br />
-          <ParaWrapper>{accessScope.join(', ')}</ParaWrapper>
-          <br />
-          <br />
-        </InputGroup>
-        {/*<Button size="small" onClick={handleCreateAnAgreement}>*/}
-        {/*  Submit*/}
-        {/*</Button>*/}
-      </FormWrapper>
-    </Form>
-  );
-};
+      </InputGroup>
+    </FormWrapper>
+  </Form>
+);
 
 export default AgreementForm;
