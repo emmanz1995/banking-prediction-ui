@@ -37,7 +37,7 @@ function AccessAccountsWizard() {
   const checkForErrors = async (step: number): Promise<boolean> => {
     try {
       // First API call
-      if(step === 1) {
+      if (step === 1) {
         const responseAgreement = await request(
           `${import.meta.env.VITE_API_URL}/api/v1/access/createUserAgreement`,
           {
@@ -45,26 +45,29 @@ function AccessAccountsWizard() {
             data,
           }
         );
-        setAgreementId(responseAgreement?.id)
-        setInstitutionId(responseAgreement?.institution_id)
+        setAgreementId(responseAgreement?.id);
+        setInstitutionId(responseAgreement?.institution_id);
         if (responseAgreement.data?.error) {
-          console.warn("Error detected in step 1 validation.");
+          console.warn('Error detected in step 1 validation.');
           return true; // Stop early if there's an error
         }
       }
 
       // Second API call (only if first passed)
       if (step === 2) {
-        const response2 = await request(`${import.meta.env.VITE_API_URL}/api/v1/access/requisitions`, { method: 'POST', data: { institutionId, agreementId } });
+        const response2 = await request(
+          `${import.meta.env.VITE_API_URL}/api/v1/access/requisitions`,
+          { method: 'POST', data: { institutionId, agreementId } }
+        );
         if (response2.data?.error) {
-          console.warn("Error detected in step 2 validation.");
+          console.warn('Error detected in step 2 validation.');
           return true;
         }
       }
 
       return false; // No errors detected in both calls
     } catch (error) {
-      console.error("Error while checking validation:", error);
+      console.error('Error while checking validation:', error);
       return true; // Assume error to prevent progressing
     }
   };
@@ -80,7 +83,7 @@ function AccessAccountsWizard() {
       formType: 'requisitionForm',
       icon: <FiMail />,
       component: RequisitionForm,
-      props: {institutionId, agreementId},
+      props: { institutionId, agreementId },
     },
     {
       formType: 'accountAccessForm',
@@ -100,14 +103,14 @@ function AccessAccountsWizard() {
     evt.preventDefault();
     let isErrorPresented = await checkForErrors(currentIndex);
     if (currentIndex < steps.length - 1) {
-      if(![1, 2].includes(currentIndex) || !isErrorPresented) {
+      if (![1, 2].includes(currentIndex) || !isErrorPresented) {
         setCurrentIndex(step => step + 1);
-        console.log("Moving to next step. Error presented:", isErrorPresented);
+        console.log('Moving to next step. Error presented:', isErrorPresented);
       } else {
         console.log(`Error detected at step ${currentIndex}! Can't proceed.`);
       }
     } else {
-      console.log("Already at the last step.");
+      console.log('Already at the last step.');
     }
   };
 

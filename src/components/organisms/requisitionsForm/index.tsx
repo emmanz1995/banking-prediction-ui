@@ -12,7 +12,10 @@ const InputGroup = styled.span`
   margin: 20px 0;
 `;
 
-const RequisitionForm: FC<{ institutionId: string; agreementId: string; }> = ({ institutionId, agreementId }) => (
+const RequisitionForm: FC<{ institutionId: string; agreementId: string }> = ({
+  institutionId,
+  agreementId,
+}) => (
   <Form>
     <h3>Requisition Form</h3>
     <FormWrapper>
@@ -31,11 +34,7 @@ const RequisitionForm: FC<{ institutionId: string; agreementId: string; }> = ({ 
       <InputGroup>
         <label>Agreement ID</label>
         <br />
-        <InputField
-          type="text"
-          name="agreementId"
-          value={agreementId}
-        />
+        <InputField type="text" name="agreementId" value={agreementId} />
       </InputGroup>
     </FormWrapper>
   </Form>
