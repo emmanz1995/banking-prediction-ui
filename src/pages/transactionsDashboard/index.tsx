@@ -43,11 +43,11 @@ const TransactionsDashboard = () => {
         <ContainerTransactionList>
           <h2>Recent Transactions</h2>
           <TransactionGrid>
-            {_.map(accounts.response, ({ id, iban, ...anyThingElse }) => {
+            {_.map(accounts.response, ({ id, iban, ...anythingElse }) => {
               return (
                 <div key={id}>
                   {_.map(
-                    anyThingElse.transactions,
+                    anythingElse.transactions,
                     ({
                       transactionAmount,
                       valueDate,

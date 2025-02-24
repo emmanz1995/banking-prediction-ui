@@ -1,5 +1,6 @@
-import InputField from '../../atom/input/index';
+import { FC } from 'react';
 import styled from 'styled-components';
+import InputField from '../../atom/input/index';
 
 const Form = styled.form``;
 
@@ -11,7 +12,7 @@ const InputGroup = styled.span`
   margin: 20px 0;
 `;
 
-const RequisitionForm = () => (
+const RequisitionForm: FC<{ institutionId: string; agreementId: string; }> = ({ institutionId, agreementId }) => (
   <Form>
     <h3>Requisition Form</h3>
     <FormWrapper>
@@ -19,42 +20,21 @@ const RequisitionForm = () => (
         <label>Search Institutions</label>
         <br />
         <InputField
-          type="search"
+          type="text"
           name="institutionId"
           placeholder="Find your institution"
+          value={institutionId}
         />
       </InputGroup>
       <br />
       <br />
       <InputGroup>
-        <label>Historical Days</label>
+        <label>Agreement ID</label>
         <br />
         <InputField
           type="text"
-          name="maxHistoricalDays"
-          placeholder="Select a number of historical days"
-        />
-      </InputGroup>
-      <br />
-      <br />
-      <InputGroup>
-        <label>Access Days</label>
-        <br />
-        <InputField
-          type="text"
-          name="accessValidForDays"
-          placeholder="Select a number of accessible days"
-        />
-      </InputGroup>
-      <br />
-      <br />
-      <InputGroup>
-        <label>Access Scopes</label>
-        <br />
-        <InputField
-          type="text"
-          name="accessScope"
-          placeholder="Select Access Scopes"
+          name="agreementId"
+          value={agreementId}
         />
       </InputGroup>
     </FormWrapper>

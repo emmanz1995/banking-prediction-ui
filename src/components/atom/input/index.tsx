@@ -2,10 +2,10 @@ import type { FC, ChangeEvent } from 'react';
 import { StyledInput } from './styles';
 
 interface IProps {
-  type: string;
-  value?: string;
+  type: any;
+  value?: any;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   onChange?: (evt: ChangeEvent) => void;
 }
 
