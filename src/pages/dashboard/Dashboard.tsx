@@ -29,7 +29,7 @@ function Dashboard() {
             title="Register your Account"
             icon={<FaUser />}
             clickLink={onClickLink}
-            link="/accessAccountsWizard"
+            link="/oauth/callback"
           />
           <AccessCard
             title="See your Account Transactions"

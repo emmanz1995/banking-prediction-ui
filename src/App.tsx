@@ -19,13 +19,12 @@ function App() {
         } /> */}
         <Route path="/" element={<Dashboard />} />
         <Route path="/accounts" element={<TransactionsDashboard />} />
-        <Route
-          path="/accessAccountsWizard"
-          element={<AccessAccountsWizard />}
-        />
+        <Route path="/oauth/callback" element={<AccessAccountsWizard />} />
       </Routes>
     </>
   );
 }
 
 export default App;
+
+//http://localhost:5173/oauth/callback?ref=9634f098-02c3-431c-9278-979c623395ab

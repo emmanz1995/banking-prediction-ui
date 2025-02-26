@@ -1,4 +1,11 @@
-import { EventHandler, FormEventHandler, useState } from 'react';
+import {
+  EventHandler,
+  FormEventHandler,
+  useState,
+  useEffect,
+  ChangeEvent,
+} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiUser, FiMail, FiLock, FiCheck } from 'react-icons/fi';
 import Layout from '../../components/template/Layout/Layout';
@@ -19,15 +26,42 @@ function AccessAccountsWizard() {
   const [formValue, setFormValue] = useState(formData);
   const [institutionId, setInstitutionId] = useState(null);
   const [agreementId, setAgreementId] = useState(null);
+  const [link, setLink] = useState(null);
+  const [requisition, setRequisition] = useState({});
   const accessScope = ['balances', 'details', 'transactions'];
 
-  const handleChange = (evt: any) => {
+  const handleChange = (evt: ChangeEvent) => {
     const { name, value } = evt.target;
     setFormValue(formValue => ({
       ...formValue,
       [name]: value,
     }));
   };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location.search);
+
+  const reference = new URLSearchParams(location.search).get('ref');
+  console.log(reference);
+
+  const getRequisition = async () => {
+    try {
+      const response = await request(
+        `${import.meta.env.VITE_API_URL}/api/v1/access/accounts/${reference}`,
+        { method: 'GET' }
+      );
+      setRequisition(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getRequisition();
+  }, [reference]);
+
+  console.log('...requisition', requisition);
 
   const data = {
     ...formValue,
@@ -57,8 +91,16 @@ function AccessAccountsWizard() {
       if (step === 2) {
         const response2 = await request(
           `${import.meta.env.VITE_API_URL}/api/v1/access/requisitions`,
-          { method: 'POST', data: { institutionId, agreementId } }
+          {
+            method: 'POST',
+            data: {
+              institutionId,
+              agreementId,
+              redirect: 'http://localhost:5173',
+            },
+          }
         );
+        setLink(response2?.link);
         if (response2.data?.error) {
           console.warn('Error detected in step 2 validation.');
           return true;
@@ -89,7 +131,7 @@ function AccessAccountsWizard() {
       formType: 'accountAccessForm',
       icon: <FiLock />,
       component: AccountAccessForm,
-      props: {},
+      props: { link },
     },
     {
       formType: 'successForm',
@@ -120,33 +162,48 @@ function AccessAccountsWizard() {
 
   const ComponentForms = steps[currentIndex - 1].component;
 
+  // TODO: add logic to sync bank details to DB
+  const handleBankTransactionSync = async () => {};
+
   return (
     <Layout>
       <MainWrapper>
-        <Card>
-          <StepContainer>
-            {steps.map(({ icon }, index: number) => (
-              <StepWrapper
-                active={currentIndex === index + 1}
-                completed={currentIndex > index + 1}
-                key={index}
-              >
-                {icon}
-              </StepWrapper>
-            ))}
-          </StepContainer>
-          <FormWrapper>
-            <ComponentForms {...steps[currentIndex - 1].props} />
-            <ButtonWrapper>
-              <Button onClick={previousPage} size="medium">
-                Back
-              </Button>
-              <Button onClick={nextPage} size="medium">
-                Next
-              </Button>
-            </ButtonWrapper>
-          </FormWrapper>
-        </Card>
+        {!(reference === null) ? (
+          <Card>
+            <h3>Requisition</h3>
+            <Button
+              size="large"
+              onClick={() => console.log('...Syncing bank account')}
+            >
+              Sync Banks Details to account
+            </Button>
+          </Card>
+        ) : (
+          <Card>
+            <StepContainer>
+              {steps.map(({ icon }, index: number) => (
+                <StepWrapper
+                  active={currentIndex === index + 1}
+                  completed={currentIndex > index + 1}
+                  key={index}
+                >
+                  {icon}
+                </StepWrapper>
+              ))}
+            </StepContainer>
+            <FormWrapper>
+              <ComponentForms {...steps[currentIndex - 1].props} />
+              <ButtonWrapper>
+                <Button onClick={previousPage} size="medium">
+                  Back
+                </Button>
+                <Button onClick={nextPage} size="medium">
+                  Next
+                </Button>
+              </ButtonWrapper>
+            </FormWrapper>
+          </Card>
+        )}
       </MainWrapper>
     </Layout>
   );
