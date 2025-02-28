@@ -1,19 +1,17 @@
 import {
-  EventHandler,
-  FormEventHandler,
   useState,
   useEffect,
-  ChangeEvent,
+  // ChangeEvent,
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiUser, FiMail, FiLock, FiCheck } from 'react-icons/fi';
 import Layout from '../../components/template/Layout/Layout';
-import AgreementForm from '../../components/organisms/agreementForm/index';
-import RequisitionForm from '../../components/organisms/requisitionsForm/index';
-import AccountAccessForm from '../../components/organisms/accountAccessForm/index';
-import SuccessForm from '../../components/organisms/successForm/index';
-import Button from '../../components/atom/button/index';
+import AgreementForm from '../../components/organisms/agreementForm';
+import RequisitionForm from '../../components/organisms/requisitionsForm';
+import AccountAccessForm from '../../components/organisms/accountAccessForm';
+import SuccessForm from '../../components/organisms/successForm';
+import Button from '../../components/atom/button';
 import { request } from '../../connector/index';
 
 function AccessAccountsWizard() {
@@ -30,7 +28,7 @@ function AccessAccountsWizard() {
   const [requisition, setRequisition] = useState({});
   const accessScope = ['balances', 'details', 'transactions'];
 
-  const handleChange = (evt: ChangeEvent) => {
+  const handleChange = (evt: any) => {
     const { name, value } = evt.target;
     setFormValue(formValue => ({
       ...formValue,
@@ -114,7 +112,7 @@ function AccessAccountsWizard() {
     }
   };
 
-  const steps = [
+  const steps: any = [
     {
       formType: 'agreementForm',
       icon: <FiUser />,
@@ -163,7 +161,42 @@ function AccessAccountsWizard() {
   const ComponentForms = steps[currentIndex - 1].component;
 
   // TODO: add logic to sync bank details to DB
-  const handleBankTransactionSync = async () => {};
+  const handleBankTransactionSync = async () => {
+    try {
+      for (const account of requisition?.accounts) {
+        await Promise.all([
+          await request(`${import.meta.env.VITE_API_URL}/api/v1/details`, {
+            method: 'POST',
+            data: { accountId: account },
+          }),
+          await request(
+            `${import.meta.env.VITE_API_URL}/api/v1/details/balances/sync`,
+            {
+              method: 'POST',
+              data: {
+                accountId: account,
+                ownerName: 'EMMANUEL CHUKWUEMEKAR OKUCHUKWU',
+              },
+            }
+          ),
+          await request(
+            `${import.meta.env.VITE_API_URL}/api/v1/details/transactions/sync`,
+            {
+              method: 'POST',
+              data: {
+                accountId: account,
+                ownerName: 'EMMANUEL CHUKWUEMEKAR OKUCHUKWU',
+              },
+            }
+          ),
+        ]);
+      }
+      console.log('...Syncing bank account');
+      navigate('/');
+    } catch (err: any) {
+      console.log('error syncing bank transaction:', err);
+    }
+  };
 
   return (
     <Layout>
@@ -171,10 +204,7 @@ function AccessAccountsWizard() {
         {!(reference === null) ? (
           <Card>
             <h3>Requisition</h3>
-            <Button
-              size="large"
-              onClick={() => console.log('...Syncing bank account')}
-            >
+            <Button size="large" onClick={handleBankTransactionSync}>
               Sync Banks Details to account
             </Button>
           </Card>
