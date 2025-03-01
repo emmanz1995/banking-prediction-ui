@@ -26,6 +26,8 @@ function AccessAccountsWizard() {
   const [agreementId, setAgreementId] = useState(null);
   const [link, setLink] = useState(null);
   const [requisition, setRequisition] = useState({});
+  // const [message, setMessage] = useState('');
+
   const accessScope = ['balances', 'details', 'transactions'];
 
   const handleChange = (evt: any) => {
@@ -41,7 +43,6 @@ function AccessAccountsWizard() {
   console.log(location.search);
 
   const reference = new URLSearchParams(location.search).get('ref');
-  console.log(reference);
 
   const getRequisition = async () => {
     try {
@@ -80,7 +81,7 @@ function AccessAccountsWizard() {
         setAgreementId(responseAgreement?.id);
         setInstitutionId(responseAgreement?.institution_id);
         if (responseAgreement.data?.error) {
-          console.warn('Error detected in step 1 validation.');
+          console.warn('Error detected in step 1 validation.');  //TODO: replace with alert message
           return true; // Stop early if there's an error
         }
       }
@@ -100,14 +101,14 @@ function AccessAccountsWizard() {
         );
         setLink(response2?.link);
         if (response2.data?.error) {
-          console.warn('Error detected in step 2 validation.');
+          console.warn('Error detected in step 2 validation.'); //TODO: replace with alert message
           return true;
         }
       }
 
       return false; // No errors detected in both calls
     } catch (error) {
-      console.error('Error while checking validation:', error);
+      console.error('Error while checking validation:', error); //TODO: replace with alert message
       return true; // Assume error to prevent progressing
     }
   };
@@ -145,12 +146,12 @@ function AccessAccountsWizard() {
     if (currentIndex < steps.length - 1) {
       if (![1, 2].includes(currentIndex) || !isErrorPresented) {
         setCurrentIndex(step => step + 1);
-        console.log('Moving to next step. Error presented:', isErrorPresented);
+        console.log('Moving to next step. Error presented:', isErrorPresented); //TODO: replace with alert message
       } else {
-        console.log(`Error detected at step ${currentIndex}! Can't proceed.`);
+        console.log(`Error detected at step ${currentIndex}! Can't proceed.`); //TODO: replace with alert message
       }
     } else {
-      console.log('Already at the last step.');
+      console.log('Already at the last step.'); //TODO: replace with alert message
     }
   };
 
@@ -189,7 +190,7 @@ function AccessAccountsWizard() {
           ),
         ]);
       }
-      console.log('...Syncing bank account');
+      console.log('...Syncing bank account'); //TODO: replace with alert message
       navigate('/');
     } catch (err: any) {
       console.log('error syncing bank transaction:', err);
@@ -199,6 +200,7 @@ function AccessAccountsWizard() {
   return (
     <Layout>
       <MainWrapper>
+        {/* TODO: place the alert dialog box here */}
         {!(reference === null) ? (
           <Card>
             <h3>Requisition</h3>

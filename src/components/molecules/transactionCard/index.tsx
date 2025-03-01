@@ -1,3 +1,4 @@
+// TODO: need to come back and revisit this component
 import type { FC } from 'react';
 import { ArrowDownLeft } from 'lucide-react';
 import styled from 'styled-components';
@@ -85,7 +86,7 @@ export const TransactionCard: FC<TransactionProps> = ({
             <ArrowDownLeft size={20} />
           </IconWrapper>
           <TransactionInfo>
-            <Description>{receiver.map(r => r)}</Description>
+            <Description>{receiver?.map(r => r)}</Description>
             <Date>{valueDate}</Date>
           </TransactionInfo>
         </LeftSection>

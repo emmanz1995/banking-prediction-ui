@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUser, FaMoneyBill, FaBalanceScale } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './dashboard.scss';
@@ -9,6 +9,7 @@ import convertToUpperCase from '../../helpers/upperCaseToLowerCase';
 function Dashboard() {
   const [showHide, setShowHide] = useState<boolean>(false);
   const [instutionsId, setInstutionsId] = useState<string>('');
+  const [requisition, setRequisition] = useState<object>(null);
   const navigate = useNavigate();
 
   const showModal = () => setShowHide(show => !show);
