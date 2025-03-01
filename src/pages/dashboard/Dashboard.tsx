@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './dashboard.scss';
 import Layout from '../../components/template/Layout/Layout';
 import AccessCard from '../../components/organisms/accessCard/index';
+import convertToUpperCase from '../../helpers/upperCaseToLowerCase';
 
 function Dashboard() {
   const [showHide, setShowHide] = useState<boolean>(false);
@@ -15,6 +16,8 @@ function Dashboard() {
   const handleSetInstitutionsId = (id: string) => setInstutionsId(id);
 
   const onClickLink = (link: string) => navigate(link);
+
+  convertToUpperCase('EMMANUEL CHUKWUEMEKAR OKUCHUKWU');
 
   return (
     <Layout>
