@@ -175,7 +175,6 @@ function AccessAccountsWizard() {
               method: 'POST',
               data: {
                 accountId: account,
-                ownerName: 'EMMANUEL CHUKWUEMEKAR OKUCHUKWU',
               },
             }
           ),
@@ -185,7 +184,6 @@ function AccessAccountsWizard() {
               method: 'POST',
               data: {
                 accountId: account,
-                ownerName: 'EMMANUEL CHUKWUEMEKAR OKUCHUKWU',
               },
             }
           ),
