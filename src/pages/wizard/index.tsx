@@ -81,7 +81,7 @@ function AccessAccountsWizard() {
         setAgreementId(responseAgreement?.id);
         setInstitutionId(responseAgreement?.institution_id);
         if (responseAgreement.data?.error) {
-          console.warn('Error detected in step 1 validation.');  //TODO: replace with alert message
+          console.warn('Error detected in step 1 validation.'); //TODO: replace with alert message
           return true; // Stop early if there's an error
         }
       }
