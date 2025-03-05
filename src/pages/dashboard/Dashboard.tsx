@@ -36,10 +36,10 @@ function Dashboard() {
             link="/oauth/callback"
           />
           <AccessCard
-            title="See your Account Transactions"
+            title="Select an Account"
             icon={<FaMoneyBill />}
             clickLink={onClickLink}
-            link="/accounts"
+            link="/accounts-menu"
           />
           <AccessCard
             title="Summarise Balance"

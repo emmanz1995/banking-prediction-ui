@@ -1,25 +1,30 @@
 // TODO: need to come back and revisit this page
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Wallet } from 'lucide-react';
-// import _ from 'lodash';
-// import { request } from '../../connector';
+import _ from 'lodash';
+import { request } from '../../connector';
 import Layout from '../../components/template/Layout/Layout';
 // import { TransactionCard } from '../../components/molecules/transactionCard';
 
 const TransactionsDashboard = () => {
   // const [accounts, setAccounts]: any[] = useState([]);
+  const [requisitions, setRequisitions]: any = useState({});
+  const [requisition, setRequisition]: any = useState({});
+  const [institution, setInstitution]: any = useState({});
 
   //TODO: will be using this state to store the balance in realtime
-  const [balance, setBalance]: number = useState(0);
+  // const [balance, setBalance]: number = useState(0);
 
-  // useEffect(() => {
-  //   retrieveAccounts();
-  // }, []);
-  // const retrieveAccounts = async () => {
-  //   const res = await request(`${import.meta.env.VITE_API_URL}/api/v1/details`);
-  //   setAccounts(res);
-  // };
+  useEffect(() => {
+    retrieveRequisitions();
+  }, []);
+  const retrieveRequisitions = async () => {
+    const res = await request(`${import.meta.env.VITE_API_URL}/api/v1/access/requisitions`);
+    setRequisitions(res);
+  };
+
+  console.log('req', requisitions?.data?.results);
 
   return (
     <Layout>
