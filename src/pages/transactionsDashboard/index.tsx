@@ -20,7 +20,9 @@ const TransactionsDashboard = () => {
     retrieveRequisitions();
   }, []);
   const retrieveRequisitions = async () => {
-    const res = await request(`${import.meta.env.VITE_API_URL}/api/v1/access/requisitions`);
+    const res = await request(
+      `${import.meta.env.VITE_API_URL}/api/v1/access/requisitions`
+    );
     setRequisitions(res);
   };
 
